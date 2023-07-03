@@ -96,4 +96,49 @@ public class EntityRelationTests {
         userRepository.deleteById(user1.getUserId());
 
     }
+
+
+/*
+    @Test
+    public void AllRelationsTest() {
+        //Given
+        Book book1 = new Book("rented");
+        Book book2 = new Book("available");
+        Rents rent1 = new Rents();
+        User user1 = new User();
+        Title title = new Title("Title", "Author", 1996);
+
+
+        book1.setTitle(title);
+        book2.setTitle(title);
+
+        title.getBooks().add(book1);
+        title.getBooks().add(book2);
+
+        book1.setRents(rent1);
+        book2.setRents(rent1);
+
+        *//*rent1.getBooks().add(book1);
+        rent1.getBooks().add(book2);
+        rent1.setUser(user1);
+        user1.getRents().add(rent1);*//*
+
+
+
+        //When
+
+        titleRepository.save(title);
+        bookRepository.save(book1);
+        bookRepository.save(book2);
+
+        *//*
+        rentRepository.save(rent1);
+
+
+
+        userRepository.save(user1);
+*//*
+        //Then
+
+    }*/
 }

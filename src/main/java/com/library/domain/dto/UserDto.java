@@ -7,6 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 public class UserDto {
@@ -18,4 +21,7 @@ public class UserDto {
     private String lastName;
 
     private LocalDate startDate;
+
+    private List<Integer> rentList = new ArrayList<>();
+
 }

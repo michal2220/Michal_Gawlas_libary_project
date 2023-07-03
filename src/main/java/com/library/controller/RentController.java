@@ -36,8 +36,8 @@ public class RentController {
     }
 
     @GetMapping(value = "{rentsId}")
-    public ResponseEntity<RentDto> getRent(@PathVariable int rentId) throws RentNotFoundException {
-        return ResponseEntity.ok(rentMapper.mapToRentDto(rentDbService.getRent(rentId)));
+    public ResponseEntity<RentDto> getRent(@PathVariable int rentsId) throws RentNotFoundException {
+        return ResponseEntity.ok(rentMapper.mapToRentDto(rentDbService.getRent(rentsId)));
     }
 
     @GetMapping
