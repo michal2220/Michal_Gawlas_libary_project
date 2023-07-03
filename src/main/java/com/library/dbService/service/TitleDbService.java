@@ -25,4 +25,6 @@ public class TitleDbService  {
     public List<Title> getAllTitles(){
         return titleRepository.findAll();
     }
+
+
 }

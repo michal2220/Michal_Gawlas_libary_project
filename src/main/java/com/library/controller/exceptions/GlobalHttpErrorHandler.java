@@ -1,5 +1,6 @@
 package com.library.controller.exceptions;
 
+import com.library.domain.Book;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,6 +13,15 @@ public class GlobalHttpErrorHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Object> handleUserNotFoundException (UserNotFoundException exception) {
         return new ResponseEntity<>("User with such id does not exist", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(TitleNotFoundException.class)
+    public ResponseEntity<Object> handleTitleNotFoundExceprtion(TitleNotFoundException exception){
+        return new ResponseEntity<>("Such title does not exist", HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(BookNotFoundException.class)
+    public ResponseEntity<Object> handleBookNotFoundExceprtion(BookNotFoundException exception){
+        return new ResponseEntity<>("Such book does not exist", HttpStatus.BAD_REQUEST);
     }
 
 }

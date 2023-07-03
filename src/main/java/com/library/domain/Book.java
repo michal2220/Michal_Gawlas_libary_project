@@ -28,4 +28,11 @@ public class Book {
     public Book(String status) {
         this.status = status;
     }
+
+
+    public Book(int bookId, String status, Title title) {
+        this.bookId = bookId;
+        this.status = status;
+        this.title = title;
+    }
 }
