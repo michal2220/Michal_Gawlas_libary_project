@@ -20,7 +20,7 @@ public class UserMapper {
         );
     }
 
-    public User mapToUser(final UserDto userDto) {
+    public User mapToUser(UserDto userDto) {
         return new User (
                 userDto.getUserId(),
                 userDto.getName(),

@@ -6,7 +6,9 @@ import com.library.dbService.service.UserDbService;
 import com.library.domain.User;
 import com.library.domain.dto.UserDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -24,21 +26,27 @@ public class UserController {
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createUser(@RequestBody  UserDto userDto) {
+    public ResponseEntity<Void> createUser(@RequestBody  UserDto userDto) {
         User user = userMapper.mapToUser(userDto);
         userDbService.saveUser(user);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    public List<UserDto> getUsers() {
+    public ResponseEntity<List<UserDto>> getUsers() {
         List<User> users = userDbService.getAllUsers();
-        return userMapper.mapToUserDtoList(users);
+        return ResponseEntity.ok(userMapper.mapToUserDtoList(users));
     }
 
     @GetMapping(value = "{userId}")
-    public UserDto getUser(@PathVariable int userId) throws UserNotFoundException {
+    public ResponseEntity<UserDto> getUser(@PathVariable int userId) throws UserNotFoundException {
+            return ResponseEntity.ok(userMapper.mapToUserDto(userDbService.getUser(userId)));
+    }
 
-        return userMapper.mapToUserDto(
-                userDbService.getUser(userId).orElseThrow(UserNotFoundException::new));
+    @PutMapping
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
+        User user = userMapper.mapToUser(userDto);
+        User savedUser = userDbService.saveUser(user);
+        return ResponseEntity.ok(userMapper.mapToUserDto(savedUser));
     }
 }

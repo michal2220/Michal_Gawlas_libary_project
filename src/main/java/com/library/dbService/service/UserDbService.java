@@ -1,5 +1,6 @@
 package com.library.dbService.service;
 
+import com.library.controller.exceptions.UserNotFoundException;
 import com.library.dbService.repository.UserRepository;
 import com.library.domain.User;
 import lombok.AllArgsConstructor;
@@ -19,8 +20,8 @@ public class UserDbService {
         return userRepository.findAll();
     }
 
-    public Optional<User> getUser(int userId) {
-        return userRepository.findById(userId);
+    public User getUser(final int userId) throws UserNotFoundException {
+        return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
     }
 
     public User saveUser (final User user){

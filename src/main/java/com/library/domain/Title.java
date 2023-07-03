@@ -1,12 +1,14 @@
 package com.library.domain;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 @Entity
 public class Title {
 
@@ -40,5 +42,12 @@ public class Title {
 
     public Title() {
 
+    }
+
+    public Title(int titleId, String title, String author, int publicationYear) {
+        this.titleId = titleId;
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
     }
 }
