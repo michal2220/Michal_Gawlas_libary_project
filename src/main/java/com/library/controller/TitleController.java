@@ -1,5 +1,6 @@
 package com.library.controller;
 
+import com.library.controller.exceptions.BookNotFoundException;
 import com.library.controller.exceptions.TitleNotFoundException;
 import com.library.dbService.mapper.TitleMapper;
 import com.library.dbService.service.TitleDbService;
@@ -35,7 +36,7 @@ public class TitleController {
     }
 
     @GetMapping(value = "{titleId}")
-    public ResponseEntity<TitleDto> getTitle(@PathVariable int titleId) throws TitleNotFoundException {
+    public ResponseEntity<TitleDto> getTitle(@PathVariable int titleId) throws BookNotFoundException {
         return ResponseEntity.ok(titleMapper.mapToTitleDto(titleDbService.getTitle(titleId)));
     }
 

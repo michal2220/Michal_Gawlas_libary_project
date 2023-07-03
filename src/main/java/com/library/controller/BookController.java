@@ -22,26 +22,26 @@ public class BookController {
     private final BookDbService bookDbService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> getBooks(@RequestBody BookDto bookDto) throws TitleNotFoundException {
+    public ResponseEntity<Void> createBook(@RequestBody BookDto bookDto) throws TitleNotFoundException, BookNotFoundException {
         Book book = bookMapper.mapToBook(bookDto);
         bookDbService.saveBook(book);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<BookDto> updateBook(@RequestBody BookDto bookDto) throws TitleNotFoundException {
+    public ResponseEntity<BookDto> updateBook(@RequestBody BookDto bookDto) throws BookNotFoundException {
         Book book = bookMapper.mapToBook(bookDto);
         Book savedBook = bookDbService.saveBook(book);
         return ResponseEntity.ok(bookMapper.mapToBookDto(savedBook));
     }
 
     @GetMapping(value = "{bookId}")
-    public ResponseEntity<BookDto> getBook(@PathVariable int bookId) throws BookNotFoundException, TitleNotFoundException {
+    public ResponseEntity<BookDto> getBook(@PathVariable int bookId) throws BookNotFoundException {
         return ResponseEntity.ok(bookMapper.mapToBookDto(bookDbService.getBook(bookId)));
     }
 
     @GetMapping
-    public ResponseEntity<List<BookDto>> getBooks() {
+    public ResponseEntity<List<BookDto>> createBook() {
         List<Book> books = bookDbService.getAllBooks();
         return ResponseEntity.ok(bookMapper.mapToBookDtoList(books));
     }

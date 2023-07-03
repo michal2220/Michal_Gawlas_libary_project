@@ -1,5 +1,6 @@
 package com.library.dbService.service;
 
+import com.library.controller.exceptions.BookNotFoundException;
 import com.library.controller.exceptions.TitleNotFoundException;
 import com.library.dbService.repository.TitleRepository;
 import com.library.domain.Title;
@@ -18,8 +19,8 @@ public class TitleDbService  {
         return titleRepository.save(title);
     }
 
-    public Title getTitle(final int titleId) throws TitleNotFoundException{
-        return titleRepository.findById(titleId).orElseThrow(TitleNotFoundException::new);
+    public Title getTitle(final int titleId) throws BookNotFoundException {
+        return titleRepository.findById(titleId).orElseThrow(BookNotFoundException::new);
     }
 
     public List<Title> getAllTitles(){

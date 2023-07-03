@@ -1,5 +1,6 @@
 package com.library.dbService.mapper;
 
+import com.library.controller.exceptions.BookNotFoundException;
 import com.library.controller.exceptions.TitleNotFoundException;
 import com.library.dbService.service.BookDbService;
 import com.library.dbService.service.TitleDbService;
@@ -24,7 +25,7 @@ public class BookMapper {
         );
     }
 
-    public Book mapToBook (final BookDto bookDto) throws TitleNotFoundException {
+    public Book mapToBook (final BookDto bookDto) throws BookNotFoundException {
         return new Book(
                 bookDto.getBookId(),
                 bookDto.getStatus(),
