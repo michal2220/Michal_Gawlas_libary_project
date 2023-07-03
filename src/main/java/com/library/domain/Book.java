@@ -1,12 +1,12 @@
 package com.library.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Entity
 public class Book {
 
@@ -15,8 +15,17 @@ public class Book {
     private int bookId;
 
     @Column
-    private int titleId;
-
-    @Column
     private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "title_id")
+    private Title title;
+
+    @ManyToOne
+    @JoinColumn(name = "rent_id")
+    private Rents rents;
+
+    public Book(String status) {
+        this.status = status;
+    }
 }

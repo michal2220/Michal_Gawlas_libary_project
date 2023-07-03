@@ -1,12 +1,11 @@
 package com.library.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,14 +16,20 @@ public class Rents {
     private int rentId;
 
     @Column
-    private int bookId;
-
-    @Column
-    private int userId;
-
-    @Column
     private LocalDate rentDate;
 
     @Column
     private LocalDate returnDate;
+
+    @OneToMany(
+            targetEntity = Book.class,
+            mappedBy = "rents",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Book> books = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
