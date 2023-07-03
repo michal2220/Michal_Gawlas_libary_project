@@ -26,7 +26,7 @@ public class UserController {
 
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<Void> createUser(@RequestBody  UserDto userDto) {
         User user = userMapper.mapToUser(userDto);
         userDbService.saveUser(user);
         return ResponseEntity.ok().build();
@@ -40,7 +40,7 @@ public class UserController {
 
     @GetMapping(value = "{userId}")
     public ResponseEntity<UserDto> getUser(@PathVariable int userId) throws UserNotFoundException {
-        return ResponseEntity.ok(userMapper.mapToUserDto(userDbService.getUser(userId)));
+            return ResponseEntity.ok(userMapper.mapToUserDto(userDbService.getUser(userId)));
     }
 
     @PutMapping

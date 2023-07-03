@@ -16,7 +16,7 @@ public class UserDbService {
 
     private final UserRepository userRepository;
 
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers(){
         return userRepository.findAll();
     }
 
@@ -24,7 +24,7 @@ public class UserDbService {
         return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
     }
 
-    public User saveUser(final User user) {
+    public User saveUser (final User user){
         return userRepository.save(user);
     }
 }
