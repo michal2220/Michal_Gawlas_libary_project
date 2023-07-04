@@ -136,11 +136,4 @@ public class EntityRelationTests {
         rentRepository.deleteById(rent1.getRentId());
         userRepository.deleteById(user1.getUserId());
     }
-
-
-    @Test
-    public void gettingAvailableBooks() {
-        List<Book> books = bookDbService.getAvailableBooks(602);
-        System.out.println(books);
-    }
 }
