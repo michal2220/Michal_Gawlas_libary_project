@@ -22,6 +22,6 @@ public class UserDto {
 
     private LocalDate startDate;
 
-    private List<Integer> rentList = new ArrayList<>();
+    private List<Integer> rentList;
 
 }

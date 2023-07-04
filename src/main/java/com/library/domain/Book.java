@@ -3,6 +3,14 @@ package com.library.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+@NamedQuery(
+        name = "Book.getAvailableBooksOfTitle",
+        query = "SELECT b FROM Book b " +
+                "JOIN b.title t " +
+                "WHERE t.titleId = :titleId " +
+                "AND b.status = 'Free'"
+
+)
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter

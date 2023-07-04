@@ -45,4 +45,10 @@ public class BookController {
         List<Book> books = bookDbService.getAllBooks();
         return ResponseEntity.ok(bookMapper.mapToBookDtoList(books));
     }
+
+    @GetMapping(value = "/availableBooks/{titleId}")
+    public ResponseEntity<List<BookDto>> getAvailableBooks(@PathVariable int titleId) throws BookNotFoundException {
+        List<Book> books = bookDbService.getAvailableBooks(titleId);
+        return ResponseEntity.ok(bookMapper.mapToBookDtoList(books));
+    }
 }

@@ -26,5 +26,10 @@ public class BookDbService {
         return bookRepository.save(book);
     }
 
+    public List<Book> getAvailableBooks(final int titleId)
+    {
+        return bookRepository.getAvailableBooksOfTitle(titleId);
+    }
+
 
 }
