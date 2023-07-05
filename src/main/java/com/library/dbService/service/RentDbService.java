@@ -7,6 +7,7 @@ import com.library.domain.Rents;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -26,4 +27,14 @@ public class RentDbService {
     public Rents saveRent(final Rents rents){
         return rentRepository.save(rents);
     }
+
+    public void returnBook(final int bookId, final LocalDate returnDate) {
+        rentRepository.updateReturnDateByBookId(bookId,returnDate);
+    }
+
+    public Rents findByBookBookId(final int bookId) {
+        return rentRepository.findByBookBookId(bookId);
+    }
+
+
 }

@@ -35,6 +35,7 @@ public class BookController {
         return ResponseEntity.ok(bookMapper.mapToBookDto(savedBook));
     }
 
+
     @GetMapping(value = "{bookId}")
     public ResponseEntity<BookDto> getBook(@PathVariable int bookId) throws BookNotFoundException {
         return ResponseEntity.ok(bookMapper.mapToBookDto(bookDbService.getBook(bookId)));

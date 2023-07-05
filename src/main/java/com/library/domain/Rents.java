@@ -7,6 +7,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedQuery(
+        name = "Rents.updateReturnDateByBookId",
+        query = "UPDATE Rents r " +
+                "SET r.returnDate = :returnDate " +
+                "WHERE r.book.bookId = :bookId"
+)
 @AllArgsConstructor
 @Getter
 @Setter

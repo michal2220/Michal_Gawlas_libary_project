@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -33,6 +34,14 @@ public class RentController {
     public ResponseEntity<RentDto> updateRent (@RequestBody RentDto rentDto) throws UserNotFoundException, BookNotFoundException {
         Rents rents = rentMapper.mapToRent(rentDto);
         Rents savedRents = rentDbService.saveRent(rents);
+        return ResponseEntity.ok(rentMapper.mapToRentDto(savedRents));
+    }
+
+    @PutMapping(value = "/bookReturn/{bookId}")
+    public ResponseEntity<?> returnBook (@PathVariable int bookId, @RequestBody Rents rents) throws BookNotFoundException{
+        Rents book = rentDbService.findByBookBookId(bookId);
+        book.setReturnDate(rents.getReturnDate());
+        Rents savedRents = rentDbService.saveRent(book);
         return ResponseEntity.ok(rentMapper.mapToRentDto(savedRents));
     }
 
