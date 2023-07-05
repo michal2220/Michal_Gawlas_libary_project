@@ -13,4 +13,5 @@ import java.util.List;
 public interface RentRepository extends CrudRepository<Rents, Integer> {
 
     List<Rents> findAll();
+
 }

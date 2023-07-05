@@ -15,6 +15,6 @@ public class RentDto {
     private int rentId;
     private LocalDate rentDate;
     private LocalDate returnDate;
-    private List<Integer> booksId = new ArrayList<>();
+    private int bookId;
     private int userId;
 }

@@ -24,13 +24,9 @@ public class Rents {
     @Column
     private LocalDate returnDate;
 
-    @OneToMany(
-            targetEntity = Book.class,
-            mappedBy = "rents",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    private List<Book> books = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

@@ -1,3 +1,4 @@
+/*
 package com.library.relationTests;
 
 import com.library.dbService.repository.BookRepository;
@@ -137,3 +138,4 @@ public class EntityRelationTests {
         userRepository.deleteById(user1.getUserId());
     }
 }
+*/

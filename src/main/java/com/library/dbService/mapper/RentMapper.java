@@ -1,5 +1,6 @@
 package com.library.dbService.mapper;
 
+import com.library.controller.exceptions.BookNotFoundException;
 import com.library.controller.exceptions.UserNotFoundException;
 import com.library.dbService.service.BookDbService;
 import com.library.dbService.service.UserDbService;
@@ -23,18 +24,18 @@ public class RentMapper {
                 rents.getRentId(),
                 rents.getRentDate(),
                 rents.getReturnDate(),
-                rents.getBooks().stream().map(r->r.getBookId()).collect(Collectors.toList()),
+                rents.getBook().getBookId(),
                 rents.getUser().getUserId()
 
         );
     }
 
-    public Rents mapToRent (final RentDto rentDto) throws UserNotFoundException {
+    public Rents mapToRent (final RentDto rentDto) throws UserNotFoundException, BookNotFoundException {
         return new Rents(
                 rentDto.getRentId(),
                 rentDto.getRentDate(),
                 rentDto.getReturnDate(),
-                bookDbService.getAllBooks(),
+                bookDbService.getBook(rentDto.getBookId()),
                 userDbService.getUser(rentDto.getUserId())
         );
     }
