@@ -1,6 +1,7 @@
 package com.library.dbService.service;
 
 import com.library.controller.exceptions.RentNotFoundException;
+import com.library.dbService.repository.BookRepository;
 import com.library.dbService.repository.RentRepository;
 import com.library.domain.Book;
 import com.library.domain.Rents;
@@ -15,6 +16,7 @@ import java.util.List;
 public class RentDbService {
 
     private final RentRepository rentRepository;
+    private final BookRepository bookRepository;
 
     public List<Rents> getAllRents() {
         return rentRepository.findAll();
@@ -28,13 +30,8 @@ public class RentDbService {
         return rentRepository.save(rents);
     }
 
-    public void returnBook(final int bookId, final LocalDate returnDate) {
-        rentRepository.updateReturnDateByBookId(bookId,returnDate);
+    public Rents findByBookId(final int bookId) {
+        Book book = bookRepository.findByBookId(bookId);
+        return rentRepository.findRentsByBook(book);
     }
-
-    public Rents findByBookBookId(final int bookId) {
-        return rentRepository.findByBookBookId(bookId);
-    }
-
-
 }

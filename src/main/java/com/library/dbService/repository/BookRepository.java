@@ -18,4 +18,6 @@ public interface BookRepository extends CrudRepository<Book, Integer> {
 
     @Query
     List <Book> getAvailableBooksOfTitle(@Param("titleId") int titleId);
+
+    Book findByBookId(int bookId);
 }

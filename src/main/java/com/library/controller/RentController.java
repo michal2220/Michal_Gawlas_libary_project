@@ -12,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -39,9 +38,9 @@ public class RentController {
 
     @PutMapping(value = "/bookReturn/{bookId}")
     public ResponseEntity<?> returnBook (@PathVariable int bookId, @RequestBody Rents rents) throws BookNotFoundException{
-        Rents book = rentDbService.findByBookBookId(bookId);
-        book.setReturnDate(rents.getReturnDate());
-        Rents savedRents = rentDbService.saveRent(book);
+        Rents rentedBook = rentDbService.findByBookId(bookId);
+        rentedBook.setReturnDate(rents.getReturnDate());
+        Rents savedRents = rentDbService.saveRent(rentedBook);
         return ResponseEntity.ok(rentMapper.mapToRentDto(savedRents));
     }
 
@@ -49,6 +48,13 @@ public class RentController {
     public ResponseEntity<RentDto> getRent(@PathVariable int rentsId) throws RentNotFoundException {
         return ResponseEntity.ok(rentMapper.mapToRentDto(rentDbService.getRent(rentsId)));
     }
+
+    @GetMapping(value = "/bookFind/{bookId}")
+    public ResponseEntity<RentDto> getBookForRent(@PathVariable int bookId) throws RentNotFoundException {
+        return ResponseEntity.ok(rentMapper.mapToRentDto(rentDbService.findByBookId(bookId)));
+    }
+
+
 
     @GetMapping
     public ResponseEntity<List<RentDto>> getRents() {

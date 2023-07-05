@@ -18,10 +18,5 @@ public interface RentRepository extends CrudRepository<Rents, Integer> {
 
     List<Rents> findAll();
 
-    @Query
-    void updateReturnDateByBookId(@Param("bookId") int bookId, @Param("returnDate")LocalDate returnDate);
-
-    Rents findByBookBookId (int BookId);
-
-
+    Rents findRentsByBook(Book book);
 }
