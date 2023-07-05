@@ -4,7 +4,9 @@ import com.library.controller.exceptions.BookNotFoundException;
 import com.library.controller.exceptions.RentNotFoundException;
 import com.library.controller.exceptions.UserNotFoundException;
 import com.library.dbService.mapper.RentMapper;
+import com.library.dbService.service.BookDbService;
 import com.library.dbService.service.RentDbService;
+import com.library.domain.Book;
 import com.library.domain.Rents;
 import com.library.domain.dto.RentDto;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ public class RentController {
 
     private final RentMapper rentMapper;
     private final RentDbService rentDbService;
+    private final BookDbService bookDbService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createRent(@RequestBody RentDto rentDto) throws UserNotFoundException, BookNotFoundException {
@@ -30,16 +33,19 @@ public class RentController {
     }
 
     @PutMapping
-    public ResponseEntity<RentDto> updateRent (@RequestBody RentDto rentDto) throws UserNotFoundException, BookNotFoundException {
+    public ResponseEntity<RentDto> updateRent(@RequestBody RentDto rentDto) throws UserNotFoundException, BookNotFoundException {
         Rents rents = rentMapper.mapToRent(rentDto);
         Rents savedRents = rentDbService.saveRent(rents);
         return ResponseEntity.ok(rentMapper.mapToRentDto(savedRents));
     }
 
     @PutMapping(value = "/bookReturn/{bookId}")
-    public ResponseEntity<?> returnBook (@PathVariable int bookId, @RequestBody Rents rents) throws BookNotFoundException{
+    public ResponseEntity<?> returnBook(@PathVariable int bookId, @RequestBody Rents rents) throws BookNotFoundException {
         Rents rentedBook = rentDbService.findByBookId(bookId);
         rentedBook.setReturnDate(rents.getReturnDate());
+        Book foundBook = bookDbService.getBook(bookId);
+        foundBook.setStatus("Free");
+        bookDbService.saveBook(foundBook);
         Rents savedRents = rentDbService.saveRent(rentedBook);
         return ResponseEntity.ok(rentMapper.mapToRentDto(savedRents));
     }
@@ -49,12 +55,10 @@ public class RentController {
         return ResponseEntity.ok(rentMapper.mapToRentDto(rentDbService.getRent(rentsId)));
     }
 
-    @GetMapping(value = "/bookFind/{bookId}")
+    @GetMapping(value = "/rentByBookId/{bookId}")
     public ResponseEntity<RentDto> getBookForRent(@PathVariable int bookId) throws RentNotFoundException {
         return ResponseEntity.ok(rentMapper.mapToRentDto(rentDbService.findByBookId(bookId)));
     }
-
-
 
     @GetMapping
     public ResponseEntity<List<RentDto>> getRents() {
