@@ -1,5 +1,6 @@
 package com.library.controller;
 
+import com.library.controller.exceptions.BookNotFoundException;
 import com.library.controller.exceptions.RentNotFoundException;
 import com.library.controller.exceptions.UserNotFoundException;
 import com.library.dbService.mapper.RentMapper;
@@ -22,14 +23,14 @@ public class RentController {
     private final RentDbService rentDbService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createRent(@RequestBody RentDto rentDto) throws UserNotFoundException {
+    public ResponseEntity<Void> createRent(@RequestBody RentDto rentDto) throws UserNotFoundException, BookNotFoundException {
         Rents rents = rentMapper.mapToRent(rentDto);
         rentDbService.saveRent(rents);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<RentDto> updateRent (@RequestBody RentDto rentDto) throws UserNotFoundException {
+    public ResponseEntity<RentDto> updateRent (@RequestBody RentDto rentDto) throws UserNotFoundException, BookNotFoundException {
         Rents rents = rentMapper.mapToRent(rentDto);
         Rents savedRents = rentDbService.saveRent(rents);
         return ResponseEntity.ok(rentMapper.mapToRentDto(savedRents));

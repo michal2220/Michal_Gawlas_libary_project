@@ -3,6 +3,8 @@ package com.library.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @NamedQuery(
         name = "Book.getAvailableBooksOfTitle",
         query = "SELECT b FROM Book b " +
@@ -29,9 +31,13 @@ public class Book {
     @JoinColumn(name = "title_id")
     private Title title;
 
-    @ManyToOne
-    @JoinColumn(name = "rent_id")
-    private Rents rents;
+    @OneToMany(
+            targetEntity = Rents.class,
+            mappedBy = "book",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Rents> rentsList;
 
     public Book(String status) {
         this.status = status;
