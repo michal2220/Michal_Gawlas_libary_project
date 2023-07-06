@@ -26,7 +26,6 @@ public class RentMapper {
                 rents.getReturnDate(),
                 rents.getBook().getBookId(),
                 rents.getUser().getUserId()
-
         );
     }
 

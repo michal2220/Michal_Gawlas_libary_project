@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 @Service
 public class TitleMapper {
 
-    public TitleDto mapToTitleDto (final Title title){
-        return new TitleDto (
+    public TitleDto mapToTitleDto(final Title title) {
+        return new TitleDto(
                 title.getTitleId(),
                 title.getTitle(),
                 title.getAuthor(),
@@ -19,7 +19,7 @@ public class TitleMapper {
         );
     }
 
-    public Title mapToTitle(final TitleDto titleDto){
+    public Title mapToTitle(final TitleDto titleDto) {
         return new Title(
                 titleDto.getTitleId(),
                 titleDto.getTitle(),
@@ -28,7 +28,7 @@ public class TitleMapper {
         );
     }
 
-    public List<TitleDto> mapToTitlesDtoList (final List<Title> titleList) {
+    public List<TitleDto> mapToTitlesDtoList(final List<Title> titleList) {
         return titleList.stream()
                 .map(this::mapToTitleDto)
                 .collect(Collectors.toList());
