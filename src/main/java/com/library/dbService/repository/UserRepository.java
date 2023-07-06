@@ -11,13 +11,11 @@ import java.util.Optional;
 
 @Repository
 @Transactional
-public interface UserRepository extends CrudRepository <User, Integer> {
+public interface UserRepository extends CrudRepository<User, Integer> {
 
     List<User> findAll();
 
     Optional<User> findById(int userId);
 
     User save(User user);
-
-
 }

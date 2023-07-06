@@ -16,7 +16,7 @@ public class UserMapper {
     private RentDbService rentDbService;
 
     public UserDto mapToUserDto(final User user) {
-        return new UserDto (
+        return new UserDto(
                 user.getUserId(),
                 user.getName(),
                 user.getLastName(),
@@ -26,17 +26,17 @@ public class UserMapper {
     }
 
     public User mapToUser(UserDto userDto) throws RentNotFoundException {
-        return new User (
+        return new User(
                 userDto.getUserId(),
                 userDto.getName(),
                 userDto.getLastName(),
                 userDto.getStartDate(),
-                rentDbService.getAllRents().stream().filter(r->r.getUser().equals(userDto.getUserId())).collect(Collectors.toList())
+                rentDbService.getAllRents().stream().filter(r -> r.getUser().equals(userDto.getUserId())).collect(Collectors.toList())
 
         );
     }
 
-    public List<UserDto> mapToUserDtoList (final List<User> userList) {
+    public List<UserDto> mapToUserDtoList(final List<User> userList) {
         return userList.stream()
                 .map(this::mapToUserDto)
                 .collect(Collectors.toList());

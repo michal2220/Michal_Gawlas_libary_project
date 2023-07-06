@@ -8,6 +8,4 @@ import java.util.List;
 public interface TitleRepository extends CrudRepository<Title, Integer> {
 
     List<Title> findAll();
-
-
 }
